@@ -15,7 +15,7 @@ class PrimeNumberGenerator
       next if primes.select{|prime| prime <= Math.sqrt(candidate)}.any? { |prime| candidate % prime == 0 }
       primes << candidate
     end
-    primes
+    primes[0..count-1]
   end
 
   # http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
@@ -31,20 +31,38 @@ class PrimeNumberGenerator
   # "there is always a prime number between k and 2k"
   #
   # The sieve_size parameter is to prevent un-necessarily small sieve sizes when calculating the first few primes. The algorithm would be more elegant
-  # without it but also more inefficient for small numbers of primes
+  # without it but would probably be more inefficient for small numbers of primes
 
   def sieve_of_eratosthenes(count, sieve_size = 50)
-    primes = [2]
+    sieve_of_eratosthenes_delete(count, sieve_size)
+  end
+
+  def sieve_of_eratosthenes_delete(count, sieve_size = 50)
+    primes = [2, 3]
     while ( primes.size < count ) do
       start = primes[-1]
       finish = [start * 2, start + sieve_size].max
-      sieve = (start..finish).to_a
+      sieve = (start..finish).step(2).to_a
       primes.each do | prime|
         sieve.delete_if {|item| item % prime == 0}
       end
       primes << sieve[0]
     end
+    primes[0..count-1]
+  end
 
+  def sieve_of_eratosthenes_nil(count, sieve_size = 50)
+    primes = [2, 3]
+    while ( primes.size < count ) do
+      start = primes[-1]
+      finish = [start * 2, start + sieve_size].max
+      sieve = (start..finish).step(2).to_a
+      primes.each do | prime|
+        sieve = sieve.collect{|item| item.nil? || item % prime == 0 ? nil : item}
+      end
+      sieve.compact!
+      primes << sieve[0]
+    end
     primes
   end
 

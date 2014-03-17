@@ -1,7 +1,6 @@
 class MultiplicationSquare
 
-  def initialize(values, out = STDOUT)
-    @values = values
+  def initialize(out = STDOUT)
     @out = out
   end
 
