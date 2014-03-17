@@ -19,6 +19,12 @@ describe PrimeNumberGenerator do
     it "builds the correct set" do 
       expect(subject.trial_division(10)).to eq(@first_10) 
     end
+    it "returns 1 element for a count of 1" do
+       expect(subject.trial_division(1).size).to eq(1)
+    end
+    it "returns the first prime for a count of 1" do
+       expect(subject.trial_division(1)).to eq([2])
+    end
   end
 
     describe "Using sieve of Eratosthenes" do
@@ -33,6 +39,12 @@ describe PrimeNumberGenerator do
     end
     it "handles larger numbers" do 
       expect(subject.sieve_of_eratosthenes(20)).to eq(@first_20) 
+    end
+    it "returns 1 element for a count of 1" do
+       expect(subject.sieve_of_eratosthenes(1).size).to eq(1)
+    end
+    it "returns the first prime for a count of 1" do
+       expect(subject.sieve_of_eratosthenes(1)).to eq([2])
     end
   end
   
