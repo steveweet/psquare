@@ -33,6 +33,10 @@ class PrimeNumberGenerator
   # The sieve_size parameter is to prevent un-necessarily small sieve sizes when calculating the first few primes. The algorithm would be more elegant
   # without it but would probably be more inefficient for small numbers of primes
 
+  # For calculation of all primes below a certain value the sieve would be a more elegant implementation as you would not need to keep a separate 
+  # primes array. You could simply build the sieve and then sieve out the composites until you hit the square root of the final target. 
+  # What you are left with in the sieve is the set of primes. The keeping of a second array is a simple way of counting how many primes we have found.
+
   def sieve_of_eratosthenes(count, sieve_size = 50)
     sieve_of_eratosthenes_delete(count, sieve_size)
   end
@@ -65,6 +69,4 @@ class PrimeNumberGenerator
     end
     primes
   end
-
-
 end

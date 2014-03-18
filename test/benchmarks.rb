@@ -1,5 +1,5 @@
 require 'benchmark'
-require './lib/prime_number_generator'
+require 'psquare'
 
 
 Benchmark.bmbm(25) do |x|
