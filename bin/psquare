@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+# == Synopsis
+#
+# Generates a prime number multiplication square
+#
+# == Usage
+#
+#    psquare [-c | --count] [ -h | --help]
+#
+# == Author
+# Steve Weet 
+#
+
+# resolve bin path, ignoring symlinks
+require "pathname"
+bin_file = Pathname.new(__FILE__).realpath
+
+# add self to libpath
+$:.unshift File.expand_path("../../lib", bin_file)
+
+require "psquare"
+include Psquare
+require 'optparse'
+
+  def usage()
+    STDERR.puts "Usage: psquare psquare [-c number | --count number ] [ -h | --help]
+      count::
+        The number of primes to generate
+    "
+    exit 0
+  end
+
+# Parse the command line arguments
+
+  count = 10
+  opts = OptionParser.new
+
+  opts.on("-c", "--count", "=count") do |val| 
+    val.to_i 
+    count = val.to_i
+    usage unless count > 0
+  end
+  opts.on("-?", "-h", "--help") { usage()}
+
+  opts.parse(ARGV) rescue  usage()
+
+
+  run(count)
