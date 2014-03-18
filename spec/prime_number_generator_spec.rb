@@ -1,5 +1,5 @@
 require 'spec_helper'
-require './lib/prime_number_generator'
+require 'psquare/prime_number_generator'
 
 describe PrimeNumberGenerator do 
 
